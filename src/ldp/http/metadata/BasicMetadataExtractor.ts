@@ -1,5 +1,6 @@
 import type { HttpRequest } from '../../../server/HttpRequest';
 import { RepresentationMetadata } from '../../representation/RepresentationMetadata';
+import type { ResourceIdentifier } from '../../representation/ResourceIdentifier';
 import { MetadataExtractor } from './MetadataExtractor';
 import type { MetadataParser } from './MetadataParser';
 
@@ -14,9 +15,9 @@ export class BasicMetadataExtractor extends MetadataExtractor {
     this.parsers = parsers;
   }
 
-  public async handle(request: HttpRequest):
+  public async handle({ request, identifier }: { request: HttpRequest; identifier: ResourceIdentifier }):
   Promise<RepresentationMetadata> {
-    const metadata = new RepresentationMetadata();
+    const metadata = new RepresentationMetadata(identifier);
     for (const parser of this.parsers) {
       await parser.parse(request, metadata);
     }
