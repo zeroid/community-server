@@ -3,5 +3,7 @@
   "EventEmitter",
   "Provider",
   "Configuration",
-  "OidcProvider"
+  "OidcProvider",
+  "Adapter",
+  "LRUCache"
 ]
